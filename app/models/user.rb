@@ -10,5 +10,10 @@ class User < ApplicationRecord
   # 並參考 Devise 文件自訂表單後通過 Strong Parameters 的方法
   validates_presence_of :name
   # 加上驗證 name 不能重覆 (關鍵字提示: uniqueness)
+  validates_uniqueness_of :name
+  has_many :followships, dependent: :destroy
+  has_many :followings, through: :followships
 
+  has_many :inverse_followships, dependent: :destroy, class_name: "Friendship", foreign_key: :following
+  has_many :followers, through: :inverse_followships, source: :user
 end

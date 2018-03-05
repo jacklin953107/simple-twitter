@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :replies, only: [:index, :create]
     member do
       post :like
-      post :unlike
+      delete :unlike #####不確定是delete或是post
     end
   end
   resources :users, only: :edit do
